@@ -1,10 +1,15 @@
+import { useContext } from "react";
+
 import { GetStaticProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
 import { format, parseISO } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
+
 import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString";
+import { PlayerContext } from "../contexts/PlayerContext";
 
 import styles from "./home.module.scss";
 
@@ -25,6 +30,8 @@ type HomeProps = {
 };
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps): JSX.Element {
+  const { play } = useContext(PlayerContext);
+
   return (
     <div className={styles.homepage}>
       {/* section contains 2 episodes in highlight */}
@@ -37,9 +44,9 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps): JSX.El
                 <Image
                   width={192}
                   height={192}
-                  objectFit="cover"
                   src={episode.thumbnail}
                   alt={episode.title}
+                  objectFit="cover"
                 />
                 <div className={styles.episodeDetails}>
                   <Link href={`/episodes/${episode.id}`}>
@@ -50,7 +57,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps): JSX.El
                   <span>{episode.durationAsString}</span>
                 </div>
 
-                <button type="button">
+                <button type="button" onClick={() => play(episode)}>
                   <img src="/play-green.svg" alt="Play episode" />
                 </button>
               </li>
