@@ -47,6 +47,7 @@ module.exports = {
             allowConciseArrowFunctionExpressionsStartingWithVoid: true,
           },
         ],
+        "jsx-a11y/media-has-caption": [2, { audio: ["Audio"], track: ["Track"] }],
       },
     },
   ],
