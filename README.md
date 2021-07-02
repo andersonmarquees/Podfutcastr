@@ -43,5 +43,5 @@ $ git clone https://github.com/andersonmarquees/Podfutcastr.git
 $ yarn install
 
 # Run Aplication
-$ yarn start
+$ yarn dev
 ```
